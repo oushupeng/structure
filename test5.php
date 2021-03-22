@@ -84,4 +84,27 @@ function xz()
     return $array;
 }
 
-var_dump(xz());
+//快速
+function ks($arr)
+{
+    $length = count($arr);
+    if ($length <= 1) return $arr;
+    //取出一个值作为中间值
+    $mid = $arr[0];
+    //左右护法
+    $left = [];
+    $right = [];
+    for ($i=1;$i<$length;$i++){
+        if ($arr[$i] < $mid) {
+            $left[] = $arr[$i];
+        } else {
+            $right[] = $arr[$i];
+        }
+    }
+    $left = ks($left);
+    $right = ks($right);
+    return array_merge($left,array($mid),$right);
+}
+
+$arr = [4,5,6,2,8,9,5,6,7,7,8,89,9,9,7,8,9,0,8,44,88,99,39];
+var_dump(ks($arr));
