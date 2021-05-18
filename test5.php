@@ -94,17 +94,46 @@ function ks($arr)
     //左右护法
     $left = [];
     $right = [];
-    for ($i=1;$i<$length;$i++){
-        if ($arr[$i] < $mid) {
+    for ($i = 1; $i < $length; $i++)
+    {
+        if ($arr[$i] < $mid)
+        {
             $left[] = $arr[$i];
-        } else {
+        }
+        else
+        {
             $right[] = $arr[$i];
         }
     }
     $left = ks($left);
     $right = ks($right);
-    return array_merge($left,array($mid),$right);
+    return array_merge($left, [$mid], $right);
 }
 
-$arr = [4,5,6,2,8,9,5,6,7,7,8,89,9,9,7,8,9,0,8,44,88,99,39];
+//二分查找
+function bin_search($array, $min_key, $max_key, $value)
+{
+    if ($min_key <= $max_key)
+    {
+        $key = intval(($min_key + $max_key) / 2);
+        if ($array[$key] == $value)
+        {
+            return $value;
+        }
+        elseif ($value < $array[$key])
+        {
+            return bin_search($array, $min_key, $key - 1, $value);
+        }
+        else
+        {
+            return bin_search($array, $key + 1, $max_key, $value);
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+$arr = [4, 5, 6, 2, 8, 9, 5, 6, 7, 7, 8, 89, 9, 9, 7, 8, 9, 0, 8, 44, 88, 99, 39];
 var_dump(ks($arr));

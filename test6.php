@@ -60,4 +60,5 @@ function arr2($array, $prefix = ';')
     return $new;
 }
 
-var_dump(trim(arr2($array), ';'));
+//var_dump(trim(arr2($array), ';'));
+var_dump(arr($array));
